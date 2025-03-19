@@ -1,16 +1,16 @@
 package com.example.employeeManagement.service;
 
-import com.example.employeeManagement.exception.EmployeeNotFoundException;
 import com.example.employeeManagement.model.Employee;
+import com.example.employeeManagement.exception.EmployeeNotFoundException;
 import com.example.employeeManagement.repository.EmployeeRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
+import java.util.List;
 @Service
-public class EmployeeServiceImp implements EmployeeService {
+@Transactional
+public class EmployeeServiceImp implements EmployeeService{
 
     private final EmployeeRepository employeeRepository;
 
@@ -25,22 +25,16 @@ public class EmployeeServiceImp implements EmployeeService {
     }
 
     @Override
-    public List<Employee> getAllEmployee() {
+    public List<Employee> getAllEmployee(){
         return employeeRepository.findAll();
     }
 
-
-
     @Override
     public Employee getEmployeeId(Long id){
-        return employeeRepository.findById(id)
-                .orElseThrow(() -> new EmployeeNotFoundException("Employee not found"));
+        return employeeRepository.findById(id).orElseThrow(() -> new EmployeeNotFoundException("Employee not found"));
     }
 
-
-    @Transactional
-    @Override
-    public Employee updateEmployee(Long id, Employee updatedEmployee) {
+    public Employee updateEmployee(Long id, Employee updatedEmployee){
         Employee employee = getEmployeeId(id);
         employee.setName(updatedEmployee.getName());
         employee.setAge(updatedEmployee.getAge());
@@ -49,12 +43,11 @@ public class EmployeeServiceImp implements EmployeeService {
         return employeeRepository.save(employee);
     }
 
-    @Transactional
     @Override
     public void deleteEmployee(Long id){
         Employee employee = getEmployeeId(id);
         employeeRepository.delete(employee);
     }
 
-
 }
+

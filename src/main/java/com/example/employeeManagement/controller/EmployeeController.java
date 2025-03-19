@@ -1,7 +1,6 @@
 package com.example.employeeManagement.controller;
 
 import com.example.employeeManagement.model.Employee;
-import com.example.employeeManagement.repository.EmployeeRepository;
 import com.example.employeeManagement.service.EmployeeService;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +28,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
-    public Employee getEmployeeById(@PathVariable Long id){
+    public Employee getEmployeeId(@PathVariable Long id){
         return employeeService.getEmployeeId(id);
     }
 

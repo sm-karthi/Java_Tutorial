@@ -10,5 +10,4 @@ public interface EmployeeService {
     Employee getEmployeeId(Long id);
     Employee updateEmployee(Long id, Employee employee);
     void deleteEmployee(Long id);
-
 }
