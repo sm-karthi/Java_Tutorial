@@ -3,7 +3,7 @@ package com.example.employeeManagement.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "employees2")  // Correct table name format
+@Table(name = "employees2")
 public class Employee {
 
     @Id
