@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    padding: 20px;
+}
+
+h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+#userInfo {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    width: 300px;
+    margin: 0 auto;
+}
+
+#userInfo p {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+#logoutBtn {
+    display: block;
+    width: 200px;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+    margin-left: 630px;
+}
+
+#logoutBtn:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+
+    #userInfo {
+        width: 100%;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <h2>Dashboard</h2>
+    <div id="userInfo">
+        <p id="userNameDisplay"></p>
+        <p id="userEmailDisplay"></p>
+    </div>
+
+    <button id="logoutBtn">Logout</button>
+
+    <script>
+        // Ensure the DOM is fully loaded before running the script
+        document.addEventListener("DOMContentLoaded", () => {
+            const logoutBtn = document.getElementById("logoutBtn");
+
+            // Display user info
+            const userName = localStorage.getItem("userName");
+            const userEmail = localStorage.getItem("userEmail");
+
+            if (!userName || !userEmail) {
+                window.location.href = "login.html"; // Redirect to login page if no user data
+            } else {
+                // Display user name and email on the dashboard
+                const userNameDisplay = document.getElementById("userNameDisplay");
+                const userEmailDisplay = document.getElementById("userEmailDisplay");
+
+                if (userNameDisplay && userEmailDisplay) {
+                    userNameDisplay.textContent = `Welcome, ${userName}`;
+                    userEmailDisplay.textContent = `Email: ${userEmail}`;
+                } else {
+                    console.error("User info display elements not found in the DOM.");
+                }
+            }
+
+            // Logout Button functionality
+            if (logoutBtn) {
+                logoutBtn.addEventListener("click", () => {
+                    localStorage.removeItem("userName");
+                    localStorage.removeItem("userEmail");
+                    window.location.href = "login.html"; // Redirect to login page
+                });
+            }
+        });
+    </script>
+</body>
+</html>
